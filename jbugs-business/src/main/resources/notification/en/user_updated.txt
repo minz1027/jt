@@ -1,0 +1,7 @@
+The user with Username: ${username} was updated.
+
+<p>Firstname: ${old_firstname} to ${new_firstname}</p> <br />
+<p>Lastname: ${old_lastname} to ${new_lastname}</p> <br />
+<p>Email: ${old_email} to ${new_email}</p> <br />
+<p>Phonenumber: ${old_phonenumber} to ${new_phonenumber}</p> <br />
+<p>Roles: ${old_roles} to ${new_roles}</p> <br />

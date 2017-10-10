@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<f:view locale="#{languageBean.locale}">
+		<h:panelGroup layout="block">
+			<h:form>
+				<h:commandLink action="#{languageBean.setLanguage('ENGLISH')}">
+				    <h:graphicImage styleClass="header-class-flag" value="https://us.nedap-luxon.com/static/default/media/images/en-flag.png" />
+				</h:commandLink>
+				<h:commandLink action="#{languageBean.setLanguage('ROMANIAN')}">
+				    <h:graphicImage styleClass="header-class-flag" value="http://flagpedia.net/data/flags/ultra/ro.png" />
+				</h:commandLink>
+			</h:form>
+		</h:panelGroup>
+	</f:view>
+</ui:composition>

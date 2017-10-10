@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h:panelGroup layout="block">
+		<h:form>
+			<p:link outcome="bugManagment" value="#{msg['menu.bugManagment']}"
+				styleClass="header-button"
+				rendered="#{userAccessService.canAccess(null)}" />
+			<p:link outcome="userManagment" value="#{msg['menu.userManagment']}"
+				styleClass="header-button"
+				rendered="#{userAccessService.canAccessE('USER_MANAGEMENT')}" />
+			<p:link outcome="permissionManager"
+				value="#{msg['menu.permissionManager']}" styleClass="header-button"
+				rendered="#{userAccessService.canAccessE('PERMISSION_MANAGEMENT')}" />
+			<p:link outcome="statistics" value="#{msg['menu.statistics']}"
+				styleClass="header-button"
+				rendered="#{userAccessService.canAccessE('BUG_MANAGEMENT')}" />
+		</h:form>
+	</h:panelGroup>
+</ui:composition>

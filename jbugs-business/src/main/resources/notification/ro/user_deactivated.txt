@@ -1,0 +1,7 @@
+Utilizatorul cu numele de: ${username} a fost deactivat.
+
+<p>Nume: ${firstname}</p> <br />
+<p>Prenume: ${lastname}</p> <br />
+<p>E-mail: ${email}</p> <br />
+<p>Telefon: ${phonenumber}</p> <br />
+<p>Roluri: ${roles} </p> <br />

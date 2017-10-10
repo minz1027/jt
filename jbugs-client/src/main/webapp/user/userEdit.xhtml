@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog id="editUserDialog"
+		header="#{msg['users.update.dialog.title']}"
+		widgetVar="userEditDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+
+		<h:form id="viewForm">
+			<p:outputPanel id="display" autoUpdate="true">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+
+					<p:outputLabel value="#{msg['users.firstname']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="firstname" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:firstname')}">
+							<p:message for="firstname" />
+						</p:tooltip>
+						<p:inputText id="firstname" required="true"
+							requiredMessage="#{msg['error.emptyfirstname']}"
+							value="#{userUpdateBean.updatedUser.firstname}"></p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.lastname']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="lastname" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:lastname')}">
+							<p:message for="lastname" />
+						</p:tooltip>
+						<p:inputText id="lastname" required="true"
+							requiredMessage="#{msg['error.emptylastname']}"
+							value="#{userUpdateBean.updatedUser.lastname}"></p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.email']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="email" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:email')}">
+							<p:message for="email" />
+						</p:tooltip>
+						<p:inputText id="email"
+							value="#{userUpdateBean.updatedUser.email}">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.phonenumber']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="phonenumber" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('viewForm:phonenumber')}">
+							<p:message for="phonenumber" />
+						</p:tooltip>
+						<p:inputText id="phonenumber"
+							requiredMessage="#{msg['error.phoneNumber']}"
+							value="#{userUpdateBean.updatedUser.phoneNumber}">
+							<f:validator validatorId="phoneNumberValidator" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.role']}" />
+					<p:selectManyMenu id="basic"
+						value="#{userUpdateBean.selectedRoles}">
+						<f:converter binding="#{roleConverter}" />
+						<f:selectItems value="#{userUpdateBean.roles}" var="role"
+							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+					</p:selectManyMenu>
+				</h:panelGrid>
+				<p:commandButton value="#{msg['users.update']}"
+					action="#{userUpdateBean.editUser}"
+					oncomplete="handlePopUpRequest('userEditDialog', xhr, status, args)"
+					update="userForm:userList, userForm:userMSG" ajax="true"
+					style="float:right" />
+			</p:outputPanel>
+		</h:form>
+		<p:ajax event="close" resetValues="true" />
+	</p:dialog>
+</ui:composition>

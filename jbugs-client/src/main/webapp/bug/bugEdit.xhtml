@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog header="#{msg['bug.update.dialog.title']}"
+		widgetVar="bugUpdateDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+
+		<h:form id="formBugEdit">
+			<p:outputPanel id="display">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+					<p:outputLabel value="#{msg['bug.title']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="title" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:title')}">
+							<p:message for="title" />
+						</p:tooltip>
+						<p:inputText id="title" required="true"
+							requiredMessage="#{msg['error.emptytitle']}"
+							value="#{bugUpdateBean.selectedBug.title}"></p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['bug.description']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="description" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('formBugEdit:description')}">
+							<p:message for="description" />
+						</p:tooltip>
+	
+						<p:inputTextarea id="description" rows="10" cols="40" counter="descCount"
+							maxlength="2000" counterTemplate="#{msg['error.remainingdescription']}"
+							required="true" autoResize="false"
+							requiredMessage="#{msg['error.emptydescription']}"
+							value="#{bugUpdateBean.selectedBug.description}">
+							<f:validator validatorId="descriptionValidator" />
+						</p:inputTextarea> <br />
+						<h:outputText id="descCount" />
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['bug.targetDate']}"></p:outputLabel>
+					<p:calendar value="#{bugUpdateBean.selectedBug.targetDate}"
+						mindate="#{now}" />
+
+					<p:outputLabel value="#{msg['bug.severity']}"></p:outputLabel>
+
+					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.severity}"
+						style="width:90px">
+
+						<f:selectItems value="#{bugUpdateBean.severityList}"
+							var="severity" itemLabel="#{msg['bug.severity.' += severity]}" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['bug.status']}"></p:outputLabel>
+					<p:selectOneMenu value="#{bugUpdateBean.selectedBug.status}"
+						converter="#{bugConverter}" style="width:90px">
+
+						<f:selectItems value="#{bugUpdateBean.getStatusList()}"
+							var="status" itemLabel="#{msg['bug.status.' += status]}"
+							itemValue="#{status}" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['bug.version']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="version" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('bugAddForm:version')}">
+							<p:message for="version" />
+						</p:tooltip>
+						<p:inputText id="version" required="true"
+							requiredMessage="#{msg['error.emptyversion']}"
+							value="#{bugUpdateBean.selectedBug.version}"></p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['bug.fixedIn']}" />
+					<p:inputText value="#{bugUpdateBean.selectedBug.fixedIn}"></p:inputText>
+				</h:panelGrid>
+			</p:outputPanel>
+
+			<p:outputPanel id="display2">
+				<h:panelGrid id="addBug2" columns="2" cellpadding="5"
+					style="width: 100%" columnClasses="panel-colum-label, panel-colum">
+
+					<p:outputLabel value="#{msg['bug.assigned']}"></p:outputLabel>
+					<f:view>
+						<p:autoComplete value="#{bugUpdateBean.selectedBug.assigned}"
+							completeMethod="#{bugUpdateBean.complete}" var="user"
+							itemLabel="#{user.username}" itemValue="#{user}"
+							converter="#{userConverter}" forceSelection="true">
+						</p:autoComplete>
+					</f:view>
+
+					<p:outputLabel value="#{msg['bug.attachment']}" />
+					<h:panelGroup id="uploadGrid">
+						<p:outputLabel value="#{bugUpdateBean.selectedBug.attachmentName}"
+							rendered="#{not empty bugUpdateBean.selectedBug.attachment}"
+							ajax="true" />
+
+						<p:commandLink actionListener="#{bugUpdateBean.deleteAttachment}"
+							styleClass="deleteButton commandLinkToButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c"
+							rendered="#{not empty bugUpdateBean.selectedBug.attachment}"
+							update="uploadFile, uploadGrid">
+							<h:outputText value="#{msg['bug.attachment.delete']}" />
+						</p:commandLink>
+
+						<p:fileUpload id="uploadFile"
+							fileUploadListener="#{bugUpdateBean.handleFileEdit}"
+							dragDropSupport="false" sizeLimit="26214400"
+							update="@this, attachmentUploded, uploadGrid" fileLimit="1"
+							disabled="#{not empty bugUpdateBean.selectedBug.attachment}"
+							allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|xlsx|xls|odf)$/"
+							value="#{bugUpdateBean.selectedBug.attachment}" />
+						<p:tooltip id="attachmentUploded" for="uploadFile"
+							position="bottom" value="#{msg['bug.attachment.updoded']}"
+							rendered="#{not empty bugUpdateBean.selectedBug.attachment}">
+						</p:tooltip>
+					</h:panelGroup>
+				</h:panelGrid>
+			</p:outputPanel>
+			<p:commandButton value="#{msg['bug.update']}"
+				action="#{bugUpdateBean.editBug}"
+				oncomplete="handlePopUpRequest('bugUpdateDialog', xhr, status, args)"
+				update="bugForm:bugList, display, bugForm:userMSG" ajax="true"
+				style="float:right;" />
+		</h:form>
+		<p:ajax event="close" resetValues="true"
+			update="formBugEdit:display, formBugEdit:display2" />
+	</p:dialog>
+</ui:composition>

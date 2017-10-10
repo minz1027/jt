@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h:panelGroup layout="block" styleClass="header-class">
+
+		<h:panelGroup layout="block" styleClass="header-class-right"
+			style="margin-left:2%;">
+			<ui:include src="/header/header-lang.xhtml"></ui:include>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="header-class-right">
+			<h:panelGroup layout="block"
+				rendered="#{sessionScope['username'] != null}">
+				<h:form styleClass="header-class-left">
+					<span> <h:outputText value="#{msg['header.loginName']}" />
+						<h:outputText value="#{sessionScope['username']}"
+							style="font-weight: bold;" />
+					</span>
+					<h:commandLink action="#{loginBean.processLogout}"
+						styleClass="header-button ui-widget"
+						value="#{msg['general.logout']}" />
+				</h:form>
+				<h:form styleClass="header-class-right">
+					<p:link outcome="notificationManagment" styleClass="notification">
+						<span class="notification-text">#{notificationBean.activeNotifications}</span>
+					</p:link>
+				</h:form>
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="header-class-left">
+			<h:panelGroup layout="block"
+				rendered="#{sessionScope['username'] != null}">
+				<ui:include src="/header/header-menu.xhtml" />
+			</h:panelGroup>
+		</h:panelGroup>
+
+	</h:panelGroup>
+</ui:composition>

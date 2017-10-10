@@ -1,0 +1,7 @@
+Utilizatorul cu numele de: ${username} a fost editat.
+
+<p>Nume: ${old_firstname} la ${new_firstname}</p> <br />
+<p>Prenume: ${old_lastname} la ${new_lastname}</p> <br />
+<p>E-mail: ${old_email} la ${new_email}</p> <br />
+<p>Telefon: ${old_phonenumber} la ${new_phonenumber}</p> <br />
+<p>Roluri: ${old_roles} la ${new_roles}</p> <br />

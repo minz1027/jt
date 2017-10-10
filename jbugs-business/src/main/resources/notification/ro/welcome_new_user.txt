@@ -1,0 +1,6 @@
+<p>Bun venit ${firstname} ${firstname}</p> <br />
+
+Contul dvs. a fost creat cu următoarele date:<br /> 
+E-mail: ${email}<br /> 
+Telefon: ${phonenumber}<br /> 
+Rol: ${roles}<br /> 

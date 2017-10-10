@@ -1,0 +1,6 @@
+<p>Welcome ${firstname} ${firstname}</p> <br />
+
+Your account was created with the following data:<br /> 
+E-mail: ${email}<br /> 
+Phone: ${phonenumber}<br /> 
+Role: ${roles}<br /> 

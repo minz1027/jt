@@ -1,0 +1,13 @@
+<p>Bug ${title} closed.</p> <br />
+
+Bug data: <br /><br />
+
+Owner: ${owner}<br /> 
+Due date: ${date}<br /> 
+Severity: ${severity}<br /> 
+Status: ${status}<br /> 
+Version: ${version}<br /> 
+Fixed in version: ${fixedIn}<br />
+Assigned: ${assigned}<br /> <br />
+
+Description: ${description}<br />

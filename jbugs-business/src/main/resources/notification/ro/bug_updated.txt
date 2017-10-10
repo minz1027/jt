@@ -1,0 +1,15 @@
+<p>Bug-ul ${title} a fost salvat.</p> <br />
+
+Este bug nou: ${isNew} <br /> <br />
+
+Date despre bug: <br /> <br />
+
+Author: ${owner}<br /> 
+Data de finalizare: ${date}<br /> 
+Severitate: ${severity}<br /> 
+Status: ${status}<br /> 
+Versiune: ${version}<br /> 
+Fixat in versiunea: ${fixedIn}<br />
+Assignat: ${assigned}<br /> <br />
+
+Descriere: ${description}<br />

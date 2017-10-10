@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title><h:outputText value="#{msg['notification.title']}" /></title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<f:view>
+		<ui:include src="/header.xhtml" />
+		<h:form id="notificationForm">
+			<p:messages id="notificationMSG" severity="info,error"
+				globalOnly="true" closable="true" />
+			<p:dataTable value="#{notificationBean.notifications}"
+				var="notification" widgetVar="userTable" id="notificationList"
+				paginator="true" selectionMode="single" rowKey="#{notification.id}"
+				rows="15" styleClass="paginated"
+				selection="#{notificationBean.selectedNotification}">
+
+				<p:ajax event="rowSelect" update=":notificationDialogForm:display"
+					oncomplete="PF('notificationDialog').show();" />
+				<p:ajax event="rowUnselect" update=":notificationDialogForm:display"
+					oncomplete="PF('notificationDialog').hide();" />
+
+				<p:column style="text-align: center;" sortBy="#{notification.type}"
+					filterBy="#{notification.type}" filterMatchMode="contains">
+					<f:facet name="header">#{msg['notification.type']}<br />
+					</f:facet>
+					<h:outputText
+						value="#{msg['notification.type.' += notification.type]}"></h:outputText>
+				</p:column>
+				<p:column style="text-align: center;"
+					sortBy="#{notification.created}" filterBy="#{notification.created}"
+					filterMatchMode="contains">
+					<f:facet name="header">#{msg['notification.created']}<br />
+					</f:facet>
+					<h:outputText value="#{notification.created}"></h:outputText>
+				</p:column>
+
+				<p:column style="text-align: center;"
+					styleClass="#{notification.active}" sortBy="#{notification.active}"
+					filterBy="#{notification.active}" filterMatchMode="contains">
+					<f:facet name="header">#{msg['notification.active']}<br />
+					</f:facet>
+					<h:outputText
+						value="#{msg['notification.active.' += notification.active]}"></h:outputText>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<ui:include src="/notification/notificationDialog.xhtml" />
+	</f:view>
+</h:body>
+</html>

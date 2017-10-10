@@ -1,0 +1,14 @@
+<p>Bug ${title} status updated.</p> <br />
+
+Status: ${old_status} to ${status}<br /><br />
+
+Bug data: <br /><br />
+
+Owner: ${owner}<br /> 
+Due date: ${date}<br /> 
+Severity: ${severity}<br /> 
+Version: ${version}<br /> 
+Fixed in version: ${fixedIn}<br />
+Assigned: ${assigned}<br /> <br />
+
+Description: ${description}<br />

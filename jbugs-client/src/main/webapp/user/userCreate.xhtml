@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog id="createUserDialog"
+		header="#{msg['users.create.dialog.title']}"
+		widgetVar="userCreateDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+
+		<h:form id="addForm">
+			<p:outputPanel id="display" autoUpdate="true">
+
+				<h:panelGrid columns="2" cellpadding="5" style="width: 100%"
+					columnClasses="panel-colum-label, panel-colum">
+
+					<p:outputLabel value="#{msg['users.firstname']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="firstname" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:firstname')}">
+							<p:message for="firstname" />
+						</p:tooltip>
+						<p:inputText id="firstname" required="true"
+							requiredMessage="#{msg['error.emptyfirstname']}"
+							value="#{userNewBean.newUser.firstname}"></p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.lastname']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="lastname" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:lastname')}">
+							<p:message for="lastname" />
+						</p:tooltip>
+						<p:inputText id="lastname" required="true"
+							requiredMessage="#{msg['error.emptylastname']}"
+							value="#{userNewBean.newUser.lastname}"></p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.email']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="email" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:email')}">
+							<p:message for="email" />
+						</p:tooltip>
+						<p:inputText id="email" requiredMessage="#{msg['error.email']}"
+							value="#{userNewBean.newUser.email}">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.phonenumber']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="phonenumber" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:phonenumber')}">
+							<p:message for="phonenumber" />
+						</p:tooltip>
+						<p:inputText id="phonenumber"
+							requiredMessage="#{msg['error.phoneNumber']}"
+							value="#{userNewBean.newUser.phoneNumber}">
+							<f:validator validatorId="phoneNumberValidator" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['login.password']}" />
+					<h:panelGroup layout="block">
+						<p:tooltip for="password" hideEvent="blur" position="right"
+							styleClass="errorTooltip" showEvent="focus"
+							rendered="#{not empty facesContext.messageList and not empty facesContext.getMessageList('addForm:password')}">
+							<p:message for="password" />
+						</p:tooltip>
+						<p:inputText id="password" required="true"
+							requiredMessage="#{msg['users.password.error']}"
+							value="#{userNewBean.newUser.password}">
+							<f:validator validatorId="passwordValidator" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['users.role']}" />
+					<p:selectManyMenu id="basic" value="#{userNewBean.newUser.roles}">
+						<f:converter binding="#{roleConverter}" />
+						<f:selectItems value="#{userNewBean.roles}" var="role"
+							itemLabel="#{msg[role.name]}" itemValue="#{role}" />
+					</p:selectManyMenu>
+
+				</h:panelGrid>
+				<p:commandButton value="#{msg['users.create.dialog.create']}"
+					action="#{userNewBean.createNewUser}"
+					oncomplete="handlePopUpRequest('userCreateDialog', xhr, status, args)"
+					update="userForm:userList, userForm:userMSG" ajax="true"
+					style="float:right;" />
+			</p:outputPanel>
+		</h:form>
+		<p:ajax event="close" resetValues="true" />
+	</p:dialog>
+</ui:composition>

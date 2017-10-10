@@ -1,0 +1,143 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-color: #FFFFFF;
+	margin: 0;
+	font-family: Arial, sans-serif;
+}
+
+button, a {
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+td {
+	text-align: center;
+}
+
+.header-class a, button, .header-element {
+	padding: 10px;
+}
+
+.header-class {
+	padding-right: 1%;
+	padding-left: 1%;
+	background: #5f5f5f;
+	overflow: auto;
+	color: white;
+}
+
+.header-class-right {
+	float: right;
+}
+
+.header-class-left {
+	float: left;
+}
+
+.header-class-flag {
+	width: 1.3em;
+	height: 0.95em;
+}
+
+.header-button {
+	background-color: inherit;
+}
+
+.header-button:hover {
+	background-color: #000000;
+}
+
+body
+>
+:not
+(
+.header-class
+ 
+)
+{
+padding
+:
+ 
+1%;
+}
+.panel-colum {
+	width: 65%;
+	text-align: left;
+}
+
+.panel-colum>div {
+	margin-bottom: 3px;
+}
+
+.panel-colum-label {
+	width: 35%;
+	text-align: left;
+}
+
+.commandLinkToButton {
+	padding: .3em 1em !important;
+}
+
+.commandLinkToAddButton {
+	background: #48D1CC !important;
+	color: #FFF !important;
+}
+
+.ui-operations {
+	padding: 0.2em !important;
+}
+
+.deleteButton {
+	margin: 0.2em;
+}
+
+th input, th div>div {
+	width: -webkit-fill-available;
+	min-width: 0px !important;
+}
+
+.normalTooltip>.ui-tooltip-text {
+	padding: .2em;
+	padding-left: .3em;
+	padding-right: .3em;
+}
+
+/* Custom */
+.errorTooltip>.ui-tooltip-text {
+	padding: 0px !important;
+}
+
+.errorTooltip>.ui-tooltip-text>div {
+	margin: 0px !important;
+}
+
+.errorTooltip>.ui-tooltip-arrow {
+	border-bottom-color: #f2dede;
+}
+
+/* Notification */
+.notification {
+	background-image: url("#{resource['icons/notification.png']}");
+	width: 19px;
+	height: 19px;
+	float: right;
+	font-size: 9px;
+	background-size: contain;
+}
+
+span.notification-text{
+	position: relative;
+    top: -1px;
+    left: 4px;
+   	background: red;
+    width: 15px;
+    height: 10px;
+    display: block;
+}

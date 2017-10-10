@@ -1,0 +1,7 @@
+The user with Username: ${username} was deactivated.
+
+<p>Firstname: ${firstname}</p> <br />
+<p>Lastname: ${lastname}</p> <br />
+<p>Email: ${email}</p> <br />
+<p>Phonenumber: ${phonenumber}</p> <br />
+<p>Roles: ${roles} </p> <br />
