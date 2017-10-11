@@ -1,7 +1,10 @@
 package edu.msg.ro.business.history.dto;
 
+import java.util.Date;
+
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.common.dto.AbstractDTO;
+import edu.msg.ro.business.history.enums.BugFields;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.persistence.history.entity.History;
 
@@ -15,13 +18,15 @@ public class HistoryDTO extends AbstractDTO {
 
 	private BugDTO bug;
 
-	private Byte attribut;
+	private BugFields attribut;
 
 	private String oldValue;
 
 	private String newValue;
 
 	private UserDTO modifiedBy;
+
+	private Date date;
 
 	public BugDTO getBug() {
 		return bug;
@@ -31,11 +36,11 @@ public class HistoryDTO extends AbstractDTO {
 		this.bug = bug;
 	}
 
-	public Byte getAttribut() {
+	public BugFields getAttribut() {
 		return attribut;
 	}
 
-	public void setAttribut(Byte attribut) {
+	public void setAttribut(BugFields attribut) {
 		this.attribut = attribut;
 	}
 
@@ -61,5 +66,13 @@ public class HistoryDTO extends AbstractDTO {
 
 	public void setModifiedBy(UserDTO modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

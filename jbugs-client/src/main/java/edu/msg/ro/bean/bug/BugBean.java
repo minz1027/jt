@@ -20,6 +20,8 @@ import edu.msg.ro.business.bug.boundary.BugFacade;
 import edu.msg.ro.business.bug.dto.BugDTO;
 import edu.msg.ro.business.bug.enums.BugSeverity;
 import edu.msg.ro.business.bug.enums.StatusEnum;
+import edu.msg.ro.business.history.boundary.HistoryFacade;
+import edu.msg.ro.business.history.dto.HistoryDTO;
 import edu.msg.ro.business.user.control.UserService;
 import edu.msg.ro.business.user.dto.UserDTO;
 import edu.msg.ro.business.user.security.PermissionChecker;
@@ -46,6 +48,9 @@ public class BugBean extends AbstractBean {
 
 	@EJB
 	private UserService userService;
+
+	@EJB
+	private HistoryFacade historie;
 
 	private BugDTO newBug = new BugDTO();
 
@@ -121,6 +126,18 @@ public class BugBean extends AbstractBean {
 	 */
 	public void setFilteredBugList(List<BugDTO> filteredBugList) {
 		this.filteredBugList = filteredBugList;
+	}
+
+	/**
+	 * Get for historieList.
+	 * 
+	 * @return
+	 */
+	public List<HistoryDTO> getHistorieList() {
+		if (selectedBug.getId() == null) {
+			return null;
+		}
+		return historie.getAll(selectedBug);
 	}
 
 	/**

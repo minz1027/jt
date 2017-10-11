@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 
@@ -19,8 +20,11 @@ import edu.msg.ro.persistence.user.entity.User;
  * @author balinc
  *
  */
+@NamedQuery(name = History.FIND_ALL, query = "SELECT h FROM History h Where h.bug = :bug")
 @Entity
 public class History extends AbstractEntity {
+
+	public static final String FIND_ALL = "History.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

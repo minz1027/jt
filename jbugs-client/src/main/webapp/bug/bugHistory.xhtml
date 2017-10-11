@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog header="#{msg['bug.history.dialog.title']}"
+		widgetVar="bugHistoryDialog" resizable="false" modal="true"
+		showEffect="clip" hideEffect="fold">
+
+		<h:form id="formBugHistory">
+			<p:outputPanel id="display">
+				<p:dataTable id="historieList" value="#{bugBean.getHistorieList()}"
+					var="history" widgetVar="historieTable" paginator="true" rows="25"
+					styleClass="paginated" selectionMode="single"
+					rowKey="#{history.id}">
+
+
+					<p:column style="text-align: center;" sortBy="#{history.attribut}"
+						filterBy="#{history.attribut}" filterMatchMode="contains">
+						<f:facet name="header">#{msg['history.attribut']}<br />
+						</f:facet>
+						<h:outputText value="#{history.attribut}"></h:outputText>
+					</p:column>
+
+					<p:column style="text-align: center;"
+						sortBy="#{history.modifiedBy}" filterBy="#{history.modifiedBy}"
+						filterMatchMode="contains">
+						<f:facet name="header">#{msg['history.modifiedBy']}<br />
+						</f:facet>
+						<h:outputText value="#{history.modifiedBy}"></h:outputText>
+					</p:column>
+
+					<p:column style="text-align: center;" sortBy="#{history.date}"
+						filterBy="#{history.date}" filterMatchMode="contains">
+						<f:facet name="header">#{msg['history.date']}<br />
+						</f:facet>
+						<h:outputText value="#{history.date}"></h:outputText>
+					</p:column>
+
+					<p:column style="text-align: center;" sortBy="#{history.oldValue}"
+						filterBy="#{history.oldValue}" filterMatchMode="contains">
+						<f:facet name="header">#{msg['history.oldValue']}<br />
+						</f:facet>
+						<h:outputText value="#{history.oldValue}"></h:outputText>
+					</p:column>
+
+					<p:column style="text-align: center;" sortBy="#{history.newValue}"
+						filterBy="#{history.newValue}" filterMatchMode="contains">
+						<f:facet name="header">#{msg['history.newValue']}<br />
+						</f:facet>
+						<h:outputText value="#{history.newValue}"></h:outputText>
+					</p:column>
+
+				</p:dataTable>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</ui:composition>

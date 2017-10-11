@@ -153,6 +153,16 @@
 					</p:commandLink>
 					<p:tooltip for="bugEdit" position="bottom"
 						styleClass="normalTooltip" value="#{msg['bug.update']}" />
+
+					<p:commandLink id="bugHistory" type="button"
+						actionListener="#{bugBean.setSelectedBug(bug)}"
+						oncomplete="PF('bugHistoryDialog').show()"
+						update=":formBugHistory:display"
+						styleClass="ui-operations ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+						<h:outputText value=" " class="ui-icon ui-icon-grip-dotted-vertical" />
+					</p:commandLink>
+					<p:tooltip for="bugHistory" position="bottom"
+						styleClass="normalTooltip" value="#{msg['bug.history']}" />
 				</p:column>
 
 				<f:facet name="footer">
@@ -197,6 +207,7 @@
 		<ui:include src="/bug/bugCreate.xhtml" />
 		<ui:include src="/bug/bugEdit.xhtml" />
 		<ui:include src="/bug/attachmentDownload.xhtml" />
+		<ui:include src="/bug/bugHistory.xhtml" />
 		<h:outputScript library="js" name="popUp.js" />
 	</f:view>
 </h:body>
