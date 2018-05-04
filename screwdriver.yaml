@@ -3,7 +3,6 @@ shared:
         
 jobs:
     main:
-       image: python
        requires: [~pr,~commit, ~sd@241:main]
        steps:
            - build: mvn clean install -Dtest=false -DfailIfNoTests=false
