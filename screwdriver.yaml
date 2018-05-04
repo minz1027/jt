@@ -1,7 +1,5 @@
 shared:
-    image:
-    environment:
-        GOPATH: /sd/workspace
+    image: openjdk
         
 jobs:
     main:
