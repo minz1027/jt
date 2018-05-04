@@ -1,5 +1,5 @@
 shared:
-    image: maven
+    image: maven:latest
         
 jobs:
     main:
