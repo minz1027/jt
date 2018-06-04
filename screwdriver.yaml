@@ -3,6 +3,6 @@ shared:
         
 jobs:
     main:
-       requires: [~pr,~commit, ~sd@241:main]
+       requires: [~pr,~commit, ~sd@112:main]
        steps:
            - build: mvn clean install
